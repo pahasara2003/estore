@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model UserTable {
+  id        Int     @id @default(autoincrement())
+  FirstName String  @db.VarChar(50)
+  LastName  String  @db.VarChar(50)
+  EMAIL     String  @unique(map: "PK_Person") @db.VarChar(50)
+  TEL       String  @db.VarChar(50)
+  ADDR      String? @db.VarChar(250)
+  POSTCODE  Int?
+  PWD       String  @db.VarChar(255)
+}
+
+model carts {
+  id          Int       @id @default(autoincrement())
+  Item        Int?
+  User        Int?
+  inserted_at DateTime  @default(now()) @db.Timestamp(0)
+  products    products? @relation(fields: [Item], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "carts_ibfk_1")
+
+  @@index([Item], map: "Item")
+}
+
+model products {
+  id             Int      @id @default(autoincrement())
+  name           String   @db.VarChar(255)
+  price          Decimal  @db.Decimal(10, 2)
+  specifications String?  @db.Text
+  company        String   @db.VarChar(50)
+  image_url      String?  @db.VarChar(255)
+  stock_amount   Int
+  type           String?  @db.VarChar(30)
+  remaining      Int?
+  ratings        Decimal? @db.Decimal(10, 1)
+  carts          carts[]
+}
+
+model wishlists {
+  id          Int      @id @default(autoincrement())
+  user        Int?
+  item        Int?
+  inserted_at DateTime @default(now()) @db.Timestamp(0)
+}
