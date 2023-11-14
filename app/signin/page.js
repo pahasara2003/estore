@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 
-const page = () => {
+const Page = () => {
   const [message, setMessage] = useState("Sign in to use our service");
   const form = useRef();
 
@@ -79,4 +79,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
