@@ -27,10 +27,9 @@ const Page = () => {
 
   useEffect(() => {
     const credentials = JSON.parse(sessionStorage.getItem("cred"));
-
-    fetch("http://localhost:3000/api/profile", {
+    fetch("/api/profile", {
       headers: {
-        Authorization: credentials.auth,
+        Authorization: credentials,
       },
     })
       .then((response) => response.json())
@@ -44,7 +43,7 @@ const Page = () => {
     <>
       {Data && (
         <div className="max-w-[700px] m-auto">
-          <ProfileTitle name={Data.firstName} />
+          <ProfileTitle name={Data.FirstName} />
           <h1 className="text-[1.2rem] font-bold text-center py-3 pt-5">
             Billing Details
           </h1>
@@ -52,24 +51,24 @@ const Page = () => {
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger>Last Name</AccordionTrigger>
-                <AccordionContent>{Data.lastName}</AccordionContent>
+                <AccordionContent>{Data.LastName}</AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
                 <AccordionTrigger>Email Address</AccordionTrigger>
-                <AccordionContent>{Data.email}</AccordionContent>
+                <AccordionContent>{Data.EMAIL}</AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-6">
                 <AccordionTrigger>Telephone</AccordionTrigger>
-                <AccordionContent>{Data.tel}</AccordionContent>
+                <AccordionContent>{Data.TEL}</AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="item-3">
                 <AccordionTrigger>Personal Address</AccordionTrigger>
-                <AccordionContent>{Data.addr}</AccordionContent>
+                <AccordionContent>{Data.ADDR}</AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4">
                 <AccordionTrigger>Postal Code</AccordionTrigger>
-                <AccordionContent>{Data.postcode}</AccordionContent>
+                <AccordionContent>{Data.POSTCODE}</AccordionContent>
               </AccordionItem>
             </Accordion>
             <Dialog>

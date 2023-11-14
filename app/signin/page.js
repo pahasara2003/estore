@@ -21,26 +21,21 @@ const Page = () => {
       json[key] = value;
     });
 
-    fetch(`http://localhost:3000/sign`, {
+    fetch(`/api/auth`, {
       method: "POST",
       body: JSON.stringify(json),
       headers: { "Content-Type": "application/json" },
-    }).then(async (data) => {
-      const status = data.status;
-
-      if (status === 200) {
-        setMessage("Login successful");
-        const json = await data.json();
-        sessionStorage.setItem("cred", JSON.stringify(json));
-        window.location.href = "/dashboard";
-      }
-      if (status === 403) {
-        setMessage("Incorrect username");
-      }
-      if (status === 406) {
-        setMessage("Incorrect password");
-      }
-    });
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        if (data.auth !== undefined) {
+          setMessage("Login successful");
+          sessionStorage.setItem("cred", JSON.stringify(data.auth));
+          window.location.href = "/dashboard";
+        } else {
+          setMessage(data.text);
+        }
+      });
   };
 
   return (

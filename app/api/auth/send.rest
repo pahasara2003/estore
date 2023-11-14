@@ -1,6 +1,6 @@
-POST http://localhost:3001/api/auth
+POST http://localhost:3000/api/auth
 Content-Type: application/json
-
 {
-    "email" : "c@gmail.com"
+    "username":"c@gmail.com",
+    "password":"123"
 }
