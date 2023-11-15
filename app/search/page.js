@@ -56,7 +56,7 @@ const Page = async (params) => {
         <Button className="h-[45px] rounded-none bg-red-400">Search</Button>
       </form>
 
-      <div className="flex flex-wrap bg-[#f2f2f2] my-5 py-5 justify-center gap-5">
+      <div className="flex flex-wrap min-h-[90vh] bg-[#f2f2f2] mt-5 py-5 justify-center gap-5">
         {data.map((d) => {
           return (
             <Card className="w-[300px]" key={Math.random()}>
@@ -81,7 +81,7 @@ const Page = async (params) => {
               </CardContent>
 
               <CardFooter>
-                <Submission />
+                <Submission id={d.id} />
               </CardFooter>
             </Card>
           );

@@ -21,5 +21,7 @@ export async function GET(req, res) {
       id: User.user,
     },
   });
+  prisma.$disconnect();
+
   return NextResponse.json(data[0]);
 }

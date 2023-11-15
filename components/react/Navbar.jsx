@@ -66,7 +66,7 @@ const Navbar = () => {
         },
         {
           text: "Log out",
-          link: "",
+          link: "/?action=logout",
           icon: <IoPersonRemoveSharp />,
         },
       ]);
