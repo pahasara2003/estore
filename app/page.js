@@ -1,5 +1,4 @@
 "use client";
-import SearchContainer from "./components/SearchPanel/SearchContainer";
 import Hero from "./components/Hero/Hero";
 import { useState, useEffect } from "react";
 import Wishlist from "./components/Dialog/Wishlist";
