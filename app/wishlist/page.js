@@ -12,13 +12,17 @@ import {
 import { FaTrash } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { data } from "jquery";
+import Image from "next/image";
 
 const CartCard = ({ data }) => {
   return (
     <Card className="min-h-[100px] shadow-none  items-center justify-evenly  flex flex-wrap">
       <CardContent className="w-[120px]  py-2">
-        <Image src={data.image_url} className="h-[100px] object-contain" />
+        <Image
+          src={data.image_url}
+          alt={data.name}
+          className="h-[100px] object-contain"
+        />
       </CardContent>
       <CardHeader className="w-[200px]">
         <CardTitle>{data.name}</CardTitle>
