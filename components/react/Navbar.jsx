@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoHome, IoDiamondSharp, IoPersonRemoveSharp } from "react-icons/io5";
 import { FaShoppingBag } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 const NavItem = ({ link, text, icon }) => {
   const path = usePathname();
@@ -22,30 +23,31 @@ const NavItem = ({ link, text, icon }) => {
 };
 
 const Navbar = () => {
-  let navigation;
+  const [navigation, SetNavigation] = useState([
+    { text: "Home", link: "/", icon: <IoHome /> },
+    {
+      text: "My Account",
+      link: "/dashboard",
+      icon: <BsFillPersonLinesFill />,
+    },
+    { text: "Wishlist", link: "/wishlist", icon: <IoDiamondSharp /> },
+    { text: "Cart", link: "/cart", icon: <FaShoppingBag /> },
+    { text: "Log out", link: "/logout", icon: <IoPersonRemoveSharp /> },
+  ]);
 
-  if (sessionStorage.getItem("cred") !== null) {
-    navigation = [
-      { text: "Home", link: "/", icon: <IoHome /> },
-      {
-        text: "My Account",
-        link: "/dashboard",
-        icon: <BsFillPersonLinesFill />,
-      },
-      { text: "Wishlist", link: "/wishlist", icon: <IoDiamondSharp /> },
-      { text: "Cart", link: "/cart", icon: <FaShoppingBag /> },
-      { text: "Log out", link: "/logout", icon: <IoPersonRemoveSharp /> },
-    ];
-  } else {
-    navigation = [
-      { text: "Home", link: "/", icon: <IoHome /> },
-      {
-        text: "My Account",
-        link: "/dashboard",
-        icon: <BsFillPersonLinesFill />,
-      },
-    ];
-  }
+  useEffect(() => {
+    if (sessionStorage.getItem("cred") === null) {
+      SetNavigation([
+        { text: "Home", link: "/", icon: <IoHome /> },
+        {
+          text: "My Account",
+          link: "/dashboard",
+          icon: <BsFillPersonLinesFill />,
+        },
+      ]);
+    }
+  }, []);
+
   return (
     <div className="flex p-5 flex-wrap items-center justify-evenly">
       <div className="text-[2rem] font-bold px-10">E Store</div>
