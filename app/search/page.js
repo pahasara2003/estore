@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-const page = () => {
+const Page = () => {
   const search = useSearchParams();
   console.log(search.get("word"));
   return (
@@ -24,4 +24,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
