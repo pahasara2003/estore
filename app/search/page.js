@@ -1,14 +1,13 @@
 "use client";
-import SearchContainer from "./components/SearchPanel/SearchContainer";
-import Hero from "./components/Hero/Hero";
-import { useState, useEffect } from "react";
-import Wishlist from "./components/Dialog/Wishlist";
 import { Input } from "@/components/ui/input";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-const Home = () => {
+const page = () => {
+  const search = useSearchParams();
+  console.log(search.get("word"));
   return (
-    <div className="py-1 bg-slate-800">
+    <div className="py-1">
       <form
         className="flex justify-center py-5 px-3"
         action="/search"
@@ -21,9 +20,8 @@ const Home = () => {
         />
         <Button className="h-[45px] rounded-none bg-red-400">Search</Button>
       </form>
-      <Hero />
     </div>
   );
 };
 
-export default Home;
+export default page;
