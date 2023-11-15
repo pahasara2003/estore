@@ -1,11 +1,46 @@
-"use client";
 import { Input } from "@/components/ui/input";
-import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { PrismaClient } from "@prisma/client";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from "next/image";
 
-const Page = () => {
-  const search = useSearchParams();
-  console.log(search.get("word"));
+import Submission from "@/components/react/Submission";
+import Stars from "@/components/react/Stars";
+
+const prisma = new PrismaClient();
+
+const Page = async (params) => {
+  const word = params.searchParams.word;
+  const data = await prisma.products.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: word,
+          },
+        },
+        {
+          type: {
+            contains: word,
+          },
+        },
+        {
+          specifications: {
+            contains: word,
+          },
+        },
+      ],
+    },
+  });
+
+  prisma.$disconnect();
   return (
     <div className="py-1">
       <form
@@ -20,6 +55,43 @@ const Page = () => {
         />
         <Button className="h-[45px] rounded-none bg-red-400">Search</Button>
       </form>
+
+      <div className="flex flex-wrap bg-[#f2f2f2] my-5 py-5 justify-center gap-5">
+        {data.map((d) => {
+          return (
+            <Card className="w-[300px]" key={Math.random()}>
+              <CardHeader className="mb-2 h-[220px]">
+                <Image
+                  width={280}
+                  height={10}
+                  src={`/${d.image_url}`}
+                  alt="Image"
+                  className="m-auto object-contain h-[150px]"
+                />
+              </CardHeader>
+              <CardContent className=" h-[150px]">
+                <Stars data={d.ratings} />
+                <p className="text-red-400 font-bold text-[1.4rem] text-center">
+                  {d.price.toString()} $
+                </p>
+                <CardTitle className="font-bold text-lg text-center">
+                  {d.name}
+                </CardTitle>
+                <CardDescription>{d.specifications}</CardDescription>
+              </CardContent>
+
+              <CardFooter>
+                <Submission />
+              </CardFooter>
+            </Card>
+          );
+        })}
+        {data.length === 0 && (
+          <h1 className="py-10 text-xl font-bold text-slate-500">
+            Sorry... we dont have such products
+          </h1>
+        )}
+      </div>
     </div>
   );
 };

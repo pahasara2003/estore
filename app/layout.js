@@ -14,9 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} pb-10`}>
+      <body className={`${inter.className}  min-h-[110vh]`}>
         <Navbar />
         {children}
+        <footer className="text-center p-3 bg-slate-800 text-white">
+          &copy; byteburst designs
+        </footer>
       </body>
     </html>
   );

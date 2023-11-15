@@ -40,6 +40,7 @@ const Page = () => {
 
   return (
     <form
+      className="bg-[#f2f2f2] py-5"
       id="my"
       ref={form}
       onSubmit={(e) => {

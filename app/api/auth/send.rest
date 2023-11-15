@@ -1,6 +1,4 @@
-POST http://localhost:3000/api/auth
-Content-Type: application/json
-{
-    "username":"c@gmail.com",
-    "password":"123"
-}
+GET http://localhost:3000/api/products?word=paha
+
+
+

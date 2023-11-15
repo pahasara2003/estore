@@ -16,16 +16,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const Authenticate = async (req) => {
-  let User;
-  const request = await req.headers;
-  const token = request.get("authorization").split(" ")[1];
-  jwt.verify(token, process.env.SECRET, (err, user) => {
-    User = user;
-  });
-  return User;
-};
-
 const CartCard = ({ data }) => {
   return (
     <Card className="min-h-[100px] max-md:w-[500px] shadow-none  items-center justify-evenly  flex flex-col sm:flex-row">
@@ -43,7 +33,9 @@ const CartCard = ({ data }) => {
         <CardDescription>{data.specifications}</CardDescription>
       </CardHeader>
       <CardContent className="w-[150px]">
-        <Label className="text-[1.2rem] font-bold">{data.price} $</Label>
+        <Label className="text-[1.2rem] font-bold">
+          {data.price.toString()} $
+        </Label>
       </CardContent>
 
       <CardFooter>
@@ -55,8 +47,12 @@ const CartCard = ({ data }) => {
   );
 };
 
-const Page = async () => {
-  const User = await Authenticate(req);
+const Page = async (params) => {
+  const User = jwt.verify(
+    params.params.auth.split("%22")[0],
+    process.env.SECRET
+  );
+
   const Data = await prisma.carts.findMany({
     where: {
       User: User.user,

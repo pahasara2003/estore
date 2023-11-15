@@ -2,7 +2,12 @@
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IoHome, IoDiamondSharp, IoPersonRemoveSharp } from "react-icons/io5";
+import {
+  IoHome,
+  IoDiamondSharp,
+  IoPersonRemoveSharp,
+  IoPersonAddSharp,
+} from "react-icons/io5";
 import { FaShoppingBag } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
@@ -12,8 +17,16 @@ const NavItem = ({ link, text, icon }) => {
   return (
     <Link
       href={link}
+      onClick={() => {
+        if (text === "Log out") {
+          sessionStorage.removeItem("cred");
+          window.location.reload();
+        }
+      }}
       className={`${
-        path === link ? " ring-1 ring-gray-200" : "text-slate-400"
+        path === link || path === `${link.split(`"`)[0]}%22`
+          ? " ring-1 ring-gray-200"
+          : "text-slate-400"
       }  flex p-3 gap-5 px-5 rounded-md  items-center `}
     >
       <span className="text-[1.5rem]">{icon}</span>
@@ -23,26 +36,38 @@ const NavItem = ({ link, text, icon }) => {
 };
 
 const Navbar = () => {
-  const [navigation, SetNavigation] = useState([
+  const [navigation, SetNavigation] = useState(() => [
     { text: "Home", link: "/", icon: <IoHome /> },
     {
-      text: "My Account",
-      link: "/dashboard",
-      icon: <BsFillPersonLinesFill />,
+      text: "Sign in",
+      link: "/signin",
+      icon: <IoPersonAddSharp />,
     },
-    { text: "Wishlist", link: "/wishlist", icon: <IoDiamondSharp /> },
-    { text: "Cart", link: "/cart", icon: <FaShoppingBag /> },
-    { text: "Log out", link: "/logout", icon: <IoPersonRemoveSharp /> },
   ]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("cred") === null) {
+    if (sessionStorage.getItem("cred") !== null) {
       SetNavigation([
         { text: "Home", link: "/", icon: <IoHome /> },
         {
           text: "My Account",
           link: "/dashboard",
           icon: <BsFillPersonLinesFill />,
+        },
+        {
+          text: "Wishlist",
+          link: `/wishlist/${sessionStorage.getItem("cred").split(" ")[1]}`,
+          icon: <IoDiamondSharp />,
+        },
+        {
+          text: "Cart",
+          link: `/cart/${sessionStorage.getItem("cred").split(" ")[1]}`,
+          icon: <FaShoppingBag />,
+        },
+        {
+          text: "Log out",
+          link: "",
+          icon: <IoPersonRemoveSharp />,
         },
       ]);
     }
