@@ -48,7 +48,7 @@ const Page = () => {
         submit();
       }}
     >
-      <Card className="m-10  mx-auto w-[500px] h-[500px]">
+      <Card className="m-10  mx-auto md:w-[620px] w-full ">
         <CardHeader>
           <CardTitle className="text-[1.8rem] mt-10 mx-auto">Sign In</CardTitle>
         </CardHeader>

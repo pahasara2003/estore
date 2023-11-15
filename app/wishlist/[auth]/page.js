@@ -40,7 +40,7 @@ const Page = async (params) => {
   prisma.$disconnect();
 
   return (
-    <div className="bg-[#f2f2f2] py-1 min-h-[90vh]">
+    <div className="bg-[#f2f2f2] py-5 min-h-[90vh]">
       {Data && (
         <div className=" m-auto ">
           <h1 className="text-[1.2rem] font-bold text-center py-3 pt-5">
