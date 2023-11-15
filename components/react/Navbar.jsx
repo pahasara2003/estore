@@ -7,6 +7,7 @@ import {
   IoDiamondSharp,
   IoPersonRemoveSharp,
   IoPersonAddSharp,
+  IoPersonCircleSharp,
 } from "react-icons/io5";
 import { FaShoppingBag } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -20,7 +21,7 @@ const NavItem = ({ link, text, icon }) => {
       onClick={() => {
         if (text === "Log out") {
           sessionStorage.removeItem("cred");
-          window.location.reload();
+          window.location.href = "/";
         }
       }}
       className={`${
@@ -41,6 +42,11 @@ const Navbar = () => {
     {
       text: "Sign in",
       link: "/signin",
+      icon: <IoPersonCircleSharp />,
+    },
+    {
+      text: "Sign Up",
+      link: "/signup",
       icon: <IoPersonAddSharp />,
     },
   ]);
@@ -51,7 +57,7 @@ const Navbar = () => {
         { text: "Home", link: "/", icon: <IoHome /> },
         {
           text: "My Account",
-          link: "/dashboard",
+          link: `/dashboard/${sessionStorage.getItem("cred").split(" ")[1]}`,
           icon: <BsFillPersonLinesFill />,
         },
         {

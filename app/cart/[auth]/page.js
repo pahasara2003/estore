@@ -43,6 +43,11 @@ const Page = async (params) => {
               );
             }
           })}
+          {Data.length === 0 && (
+            <h1 className="py-10 text-xl font-bold text-slate-500">
+              Your wishlist is empty
+            </h1>
+          )}
         </div>
       </div>
     </div>

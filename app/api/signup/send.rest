@@ -1,0 +1,4 @@
+DELETE http://localhost:3000/api/addWish?item=17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjo4MywiaWF0IjoxNzAwMDQ0MDQ3fQ.8HrmahLalk7_sKYZ-wuJvzk-YFbYkW0YglFXy48XcSo
+
+

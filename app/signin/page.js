@@ -31,7 +31,7 @@ const Page = () => {
         if (data.auth !== undefined) {
           setMessage("Login successful");
           sessionStorage.setItem("cred", JSON.stringify(data.auth));
-          window.location.href = "/dashboard";
+          window.location.href = "/";
         } else {
           setMessage(data.text);
         }

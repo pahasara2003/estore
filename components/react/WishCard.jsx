@@ -82,7 +82,7 @@ const WishCard = ({ data, Cart }) => {
               onClick={() => {
                 setDisplay(null);
                 fetch(`/api/addWish?item=${data.id}`, {
-                  method: "PUT",
+                  method: "DELETE",
                   headers: {
                     Authorization: JSON.parse(sessionStorage.getItem("cred")),
                   },

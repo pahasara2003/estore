@@ -59,7 +59,7 @@ const Page = async (params) => {
       <div className="flex flex-wrap min-h-[90vh] bg-[#f2f2f2] mt-5 py-5 justify-center gap-5">
         {data.map((d) => {
           return (
-            <Card className="w-[300px]" key={Math.random()}>
+            <Card className="w-[300px] h-fit" key={Math.random()}>
               <CardHeader className="mb-2 h-[220px]">
                 <Image
                   width={280}
