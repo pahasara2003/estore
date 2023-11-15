@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import Image from "next/image";
 
 const SlideShow = () => {
   const [img, setImg] = useState(0);
@@ -7,7 +8,8 @@ const SlideShow = () => {
   return (
     <div className="p-5 ">
       {(
-        <img
+        <Image
+          alt="dd"
           src={`${list[img]}`}
           loading="lazy"
           className="max-w-[600px] h-[400px]  p-2"
@@ -18,7 +20,8 @@ const SlideShow = () => {
           if (a !== list[img]) {
             return (
               (
-                <img
+                <Image
+                  alt="slideshow"
                   src={`${a}`}
                   onClick={() => {
                     setImg(i);

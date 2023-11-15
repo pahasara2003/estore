@@ -1,7 +1,6 @@
 "use client";
 import Hero from "./components/Hero/Hero";
 import { useState, useEffect } from "react";
-import Wishlist from "./components/Dialog/Wishlist";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
