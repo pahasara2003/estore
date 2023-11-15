@@ -63,7 +63,7 @@ const Page = () => {
           </h1>
           <div className="max-w-[600px] m-auto px-3 flex flex-col gap-1">
             {Data.map((d, i) => {
-              return <CartCard data={d.products} />;
+              return <CartCard data={d.products} key={i} />;
             })}
           </div>
         </div>
